@@ -11,14 +11,14 @@ const routes = [
     component: ScanQR
   },
   {
-    path: "/scan-qr",
-    name: "scan-qr",
+    path: "/scan",
+    name: "scan",
     component: () =>
       import(/* webpackChunkName: "generate-qr" */ "../views/ScanQR.vue")
   },
   {
-    path: "/generate-qr",
-    name: "generate-qr",
+    path: "/generate",
+    name: "generate",
     component: () =>
       import(/* webpackChunkName: "generate-qr" */ "../views/GenerateQR.vue")
   }
