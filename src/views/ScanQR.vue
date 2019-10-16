@@ -7,7 +7,9 @@
     </p>
     <qrcode-capture @decode="onDecode" />
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
-      <button @click="switchCamera">Switch Camera</button>
+      <button class="btn btn-primary" @click="switchCamera">
+        Switch Camera
+      </button>
     </qrcode-stream>
   </div>
 </template>

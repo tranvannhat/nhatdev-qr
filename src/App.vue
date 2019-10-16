@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/scan-qr">Scan QR</router-link> |
-      <router-link to="/genrate-qr">Generate QR</router-link>
+      <router-link to="/scan">Scan QR</router-link> |
+      <router-link to="/genrate">Generate QR</router-link>
     </div>
     <router-view />
   </div>
