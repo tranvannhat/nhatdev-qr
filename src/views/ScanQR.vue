@@ -95,7 +95,7 @@ export default {
 button {
   position: absolute;
   left: 10px;
-  bottom: 10px;
+  top: 10px;
 }
 .error {
   font-weight: bold;
