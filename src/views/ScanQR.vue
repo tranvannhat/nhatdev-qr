@@ -12,7 +12,11 @@
       :capture="false"
     />
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
-      <button v-if="error === ''" class="btn btn-sm btn-primary" @click="switchCamera">
+      <button
+        v-if="error === ''"
+        class="btn btn-sm btn-primary"
+        @click="switchCamera"
+      >
         Switch Camera
       </button>
     </qrcode-stream>
@@ -90,10 +94,7 @@ export default {
 }
 button {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
+  left: 10px;
   bottom: 10px;
 }
 .error {
