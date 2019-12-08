@@ -1,15 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import ScanQR from "../views/ScanQR.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: ScanQR
-  },
+  { path: "/", redirect: "/scan" },
   {
     path: "/scan",
     name: "scan",

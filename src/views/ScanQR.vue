@@ -2,12 +2,17 @@
   <div>
     <p class="error">{{ error }}</p>
     <p class="decode-result" v-if="result.length > 0">
-      Last result:
+      Result:
       <b>{{ result }}</b>
     </p>
-    <qrcode-capture @decode="onDecode" />
+    <qrcode-capture
+      class="qr--choose"
+      @decode="onDecode"
+      :multiple="false"
+      :capture="false"
+    />
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
-      <button class="btn btn-primary" @click="switchCamera">
+      <button v-if="error === ''" class="btn btn-sm btn-primary" @click="switchCamera">
         Switch Camera
       </button>
     </qrcode-stream>
@@ -40,6 +45,8 @@ export default {
       }
     },
     onDecode(result) {
+      console.log(111111);
+      console.log(result);
       this.result = result;
     },
 
@@ -50,7 +57,7 @@ export default {
         const triedFrontCamera = this.camera === "front";
         const triedRearCamera = this.camera === "rear";
         if (error.name === "NotAllowedError") {
-          this.error = "ERROR: you need to grant camera access permisson";
+          this.error = "ERROR: Need camera access permisson";
         } else if (error.name === "NotFoundError") {
           this.error = "ERROR: no camera on this device";
         } else if (error.name === "NotSupportedError") {
@@ -75,10 +82,19 @@ export default {
 </script>
 
 <style scoped>
+.qr--choose {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 button {
   position: absolute;
-  left: 10px;
-  top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 10px;
 }
 .error {
   font-weight: bold;
