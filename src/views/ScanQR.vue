@@ -1,10 +1,6 @@
 <template>
   <div>
     <p class="error">{{ error }}</p>
-    <p class="decode-result" v-if="result.length > 0">
-      Result:
-      <b>{{ result }}</b>
-    </p>
     <b-input-group class="px-5 my-3" v-if="result.length > 0">
       <b-form-input v-model="result"></b-form-input>
       <b-input-group-append>
