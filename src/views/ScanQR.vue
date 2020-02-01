@@ -5,20 +5,15 @@
       Result:
       <b>{{ result }}</b>
     </p>
-    <qrcode-capture
-      class="qr--choose"
-      @decode="onDecode"
-      :multiple="false"
-      :capture="false"
-    />
+    <b-input-group class="px-5 my-3" v-if="result.length > 0">
+      <b-form-input v-model="result"></b-form-input>
+      <b-input-group-append>
+        <b-button variant="info" @click="onCopy">Copy</b-button>
+      </b-input-group-append>
+    </b-input-group>
+    <qrcode-capture class="qr--choose" @decode="onDecode" :multiple="false" :capture="false" />
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
-      <button
-        v-if="error === ''"
-        class="btn btn-sm btn-primary"
-        @click="switchCamera"
-      >
-        Switch Camera
-      </button>
+      <button v-if="error === ''" class="btn btn-sm btn-primary" @click="switchCamera">Switch Camera</button>
     </qrcode-stream>
   </div>
 </template>
@@ -80,6 +75,16 @@ export default {
           this.error = "ERROR: Stream API is not supported in this browser";
         }
       }
+    },
+
+    onCopy() {
+      this.$copyText(this.result).then(
+        res => {
+          console.log(res);
+        },error => {
+          console.log(error);
+        }
+      );
     }
   }
 };
@@ -92,7 +97,7 @@ export default {
   border-radius: 5px;
   margin-bottom: 10px;
 }
-button {
+button.btn-primary {
   position: absolute;
   left: 10px;
   top: 10px;
