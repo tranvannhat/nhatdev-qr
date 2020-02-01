@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import BootstrapVue from "bootstrap-vue";
-import VueClipboard from 'vue-clipboard2'
+import VueClipboard from "vue-clipboard2";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";

@@ -7,9 +7,20 @@
         <b-button variant="info" @click="onCopy">Copy</b-button>
       </b-input-group-append>
     </b-input-group>
-    <qrcode-capture class="qr--choose" @decode="onDecode" :multiple="false" :capture="false" />
+    <qrcode-capture
+      class="qr--choose"
+      @decode="onDecode"
+      :multiple="false"
+      :capture="false"
+    />
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
-      <button v-if="error === ''" class="btn btn-sm btn-primary" @click="switchCamera">Switch Camera</button>
+      <button
+        v-if="error === ''"
+        class="btn btn-sm btn-primary"
+        @click="switchCamera"
+      >
+        Switch Camera
+      </button>
     </qrcode-stream>
   </div>
 </template>
@@ -77,7 +88,8 @@ export default {
       this.$copyText(this.result).then(
         res => {
           console.log(res);
-        },error => {
+        },
+        error => {
           console.log(error);
         }
       );
