@@ -1,18 +1,27 @@
 <template>
   <div class="qr-container">
-    <p class="error">{{ error }}</p>
-    <b-input-group class="my-3" v-if="result.length > 0">
-      <b-form-input v-model="result"></b-form-input>
-      <b-input-group-append>
-        <b-button variant="info" @click="onCopy">Copy</b-button>
-      </b-input-group-append>
-    </b-input-group>
+    <!-- <p class="error">{{ error }}</p> -->
     <qrcode-capture
       class="qr--choose"
       @decode="onDecode"
       :multiple="false"
       :capture="false"
     />
+    <b-input-group class="my-3" v-if="result.length > 0">
+      <b-form-input v-model="result"></b-form-input>
+      <b-input-group-append>
+        <b-button variant="info" @click="onCopy(result)">Copy</b-button>
+      </b-input-group-append>
+    </b-input-group>
+    <div class="detect-qr mb-3" v-if="detectQr.name">
+      <p class="detect-title">AI Detect: QR WIFI</p>
+      <p class="qr-element"><span>Name:</span>{{ detectQr.name }}</p>
+      <p class="qr-element">
+        <span>Password:</span>{{ detectQr.password
+        }}<span class="copy" @click="onCopy(detectQr.password)">copy</span>
+      </p>
+      <p class="qr-element"><span>Type:</span>{{ detectQr.type }}</p>
+    </div>
     <qrcode-stream :camera="camera" @init="onInit" @decode="onDecode">
       <button
         v-if="error === ''"
@@ -39,6 +48,28 @@ export default {
     };
   },
 
+  computed: {
+    detectQr() {
+      if (
+        this.result.indexOf("WIFI:") >= 0 &&
+        this.result.indexOf("P:") >= 0 &&
+        this.result.indexOf("S:") >= 0
+      ) {
+        // this qr wifi
+        const arr = this.result.split(";");
+        let name = arr[2].split(":")[1];
+        let password = arr[1].split(":")[1];
+        let type = arr[0].split(":")[2];
+        return {
+          name,
+          password,
+          type
+        };
+      }
+      return this.result;
+    }
+  },
+
   methods: {
     switchCamera() {
       switch (this.camera) {
@@ -51,7 +82,6 @@ export default {
       }
     },
     onDecode(result) {
-      console.log(111111);
       console.log(result);
       this.result = result;
     },
@@ -84,8 +114,8 @@ export default {
       }
     },
 
-    onCopy() {
-      this.$copyText(this.result).then(
+    onCopy(val) {
+      this.$copyText(val).then(
         res => {
           console.log(res);
         },
@@ -113,5 +143,27 @@ button.btn-primary {
 .error {
   font-weight: bold;
   color: red;
+}
+.detect-qr {
+  background-color: #c3e6cb;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+}
+.detect-title {
+  font-weight: 600;
+}
+.qr-element {
+  display: block;
+  margin-bottom: 5px;
+}
+.qr-element span {
+  font-weight: 600;
+  padding-right: 5px;
+}
+.copy {
+  cursor: pointer;
+  color: chocolate;
+  padding-left: 5px;
 }
 </style>

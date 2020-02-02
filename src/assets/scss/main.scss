@@ -1,16 +1,18 @@
 @import "./plugin.scss";
 
 @media only screen and (min-width: 700px) {
-  .qr-container {
-    max-width: 600px;
+  .qr-container,
+  .qr--choose {
+    width: 600px;
     margin: auto;
   }
 }
 
 
 @media only screen and (max-width: 699px) {
-  .qr-container {
-    max-width: 100%;
+  .qr-container,
+  .qr--choose {
+    width: 100%;
     padding: 15px;
   }
 }
