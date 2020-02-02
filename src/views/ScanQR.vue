@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="qr-container">
     <p class="error">{{ error }}</p>
-    <b-input-group class="px-5 my-3" v-if="result.length > 0">
+    <b-input-group class="my-3" v-if="result.length > 0">
       <b-form-input v-model="result"></b-form-input>
       <b-input-group-append>
         <b-button variant="info" @click="onCopy">Copy</b-button>

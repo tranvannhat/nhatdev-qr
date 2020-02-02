@@ -5,7 +5,7 @@
     </router-link>
     <div id="nav">
       <router-link to="/scan" class="mr-3">Scan QR</router-link>
-      <router-link to="/genrate">Generate QR</router-link>
+      <router-link to="/generate">Generate QR</router-link>
     </div>
     <router-view />
   </div>
