@@ -1,4 +1,5 @@
 # nhatdev-qr
+Demo: qr.nhat.dev
 
 ## Project setup
 ```
